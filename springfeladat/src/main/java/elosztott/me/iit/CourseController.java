@@ -1,10 +1,14 @@
 package elosztott.me.iit;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -36,6 +40,13 @@ public class CourseController {
 		
 	}
 	
+	@RequestMapping(value="/rest")
+	public ModelAndView rest(){
+		ModelAndView model = new ModelAndView("rest");
+		return model;
+		
+	}
+	
 	@RequestMapping(value = "/addCourse", method=RequestMethod.GET)
 	public String newUser(){
 		return "addCourse";
@@ -56,6 +67,7 @@ public class CourseController {
 			return mav;
 		}
 		}
+
 	
 
 }

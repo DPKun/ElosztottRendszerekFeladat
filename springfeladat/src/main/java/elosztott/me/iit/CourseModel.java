@@ -34,6 +34,8 @@ public class CourseModel {
 		return "CourseModel [courseName=" + courseName + ", courseCredit=" + courseCredit + ", preferedSemester="
 				+ preferedSemester + "]";
 	}
+	public CourseModel() {
+	}
 	
 	
 	

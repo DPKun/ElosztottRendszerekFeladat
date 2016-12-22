@@ -7,7 +7,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -46,11 +45,37 @@
 			<artifactId>lombok</artifactId>
 			<version>1.16.10</version>
 		</dependency>
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+		<!-- https://mvnrepository.com/artifact/jstl/jstl -->
+<dependency>
+    <groupId>jstl</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>angular-material</artifactId>
+			<version>1.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.2.4.Final</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.webjars/angularjs -->
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>angularjs</artifactId>
+    <version>1.4.1</version>
+</dependency>
+		
+		
 	</dependencies>
 	<build>
 		<finalName>springfeladat</finalName>

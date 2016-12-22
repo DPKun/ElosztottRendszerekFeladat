@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CourseManager implements Serializable{
 	/**
-	 * 
+	 *  
 	 */
 
 	private List<CourseModel> courses = new ArrayList<CourseModel>();
@@ -29,4 +29,10 @@ public class CourseManager implements Serializable{
 	public void clearCourses(){
 		courses.clear();
 	}
+	public CourseManager() {
+		super();
+	}
+	
+	
+	
 }
