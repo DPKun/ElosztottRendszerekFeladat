@@ -37,7 +37,7 @@ public class CourseController {
 	}
 	
 	@RequestMapping(value = "/addCourse", method=RequestMethod.GET)
-	public String newUser(){
+	public String newCourse(){
 		return "addCourse";
 	}
 	
@@ -52,7 +52,7 @@ public class CourseController {
 		else{
 			ModelAndView mav = new ModelAndView("redirect:/welcome");
 			courseManager.addCourse(new CourseModel(newCourseRequest.getCourseName(), newCourseRequest.getCourseCredit(), newCourseRequest.getPreferedSemester()));
-			mav.addObject("users", courseManager.getCourses());
+			mav.addObject("courses", courseManager.getCourses());
 			return mav;
 		}
 		}
