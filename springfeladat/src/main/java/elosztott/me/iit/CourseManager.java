@@ -19,6 +19,12 @@ public class CourseManager implements Serializable{
 		return courses;
 	}
 	
+	public void removeCourse(int course){
+		for(CourseModel cours : courses){
+		System.out.println(courses.indexOf(cours));}
+		courses.remove(course);
+	}
+	
 	public CourseModel getFirstCourse(){
 		if(!courses.isEmpty()){
 			return courses.get(0);

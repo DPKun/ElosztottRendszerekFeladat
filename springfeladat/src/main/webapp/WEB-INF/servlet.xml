@@ -13,6 +13,7 @@
 	<context:annotation-config></context:annotation-config>
 	<mvc:annotation-driven/>
 	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/admin/css/**" location="/css/" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
