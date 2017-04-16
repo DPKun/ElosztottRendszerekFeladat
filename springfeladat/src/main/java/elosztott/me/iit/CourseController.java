@@ -21,7 +21,7 @@ public class CourseController {
 	@Autowired
 	CourseManager courseManager;
 	
-	List<CourseModel> courses = new ArrayList<>();
+	List<CourseModel> courses = new ArrayList<CourseModel>();
 	
 	private String[] fields = new String[] { "courseName", "courseCredit", "preferredSemester" };
 	
