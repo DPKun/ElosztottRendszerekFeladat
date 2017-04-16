@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableWebMvc
-@ImportResource({"classpath:/security.xml"})
+@ImportResource({"classpath:/security.xml","classpath:/context.xml"})
 @ComponentScan(basePackages = {"elosztott.me.iit"})
 public class BootApplication extends SpringBootServletInitializer {
 

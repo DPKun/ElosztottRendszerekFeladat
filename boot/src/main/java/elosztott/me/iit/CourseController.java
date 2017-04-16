@@ -19,9 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CourseController {
 	@Autowired
-	CourseManager courseManager;
+	private CourseManager courseManager;
 	
-	List<CourseModel> courses = new ArrayList<>();
+	private List<CourseModel> courses = new ArrayList<>();
 	
 	private String[] fields = new String[] { "courseName", "courseCredit", "preferredSemester" };
 	

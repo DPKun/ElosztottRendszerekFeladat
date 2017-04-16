@@ -21,6 +21,9 @@ public class AdminController{
 	@Autowired
 	CourseManager courseManager;
 	
+	@Autowired
+	SendCourses sendCourses;
+	
 	private String[] fields = new String[] { "courseName", "courseCredit", "preferredSemester" };
 	
 	
@@ -51,6 +54,7 @@ public class AdminController{
 		else{
 			ModelAndView mav = new ModelAndView("redirect:/welcome");
 			courseManager.addCourse(new CourseModel(newCourseRequest.getCourseName(), newCourseRequest.getCourseCredit(), newCourseRequest.getPreferredSemester()));
+			sendCourses.send(newCourseRequest);
 			mav.addObject("courses", courseManager.getCourses());
 			return mav;
 		}

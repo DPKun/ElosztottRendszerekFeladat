@@ -32,6 +32,12 @@ public class CourseManager implements Serializable{
 		return new CourseModel("Unknown", -1, -1);
 	}
 	
+	public boolean containsCourse(CourseModel course){
+		if(-1==courses.indexOf(course)){
+		return false;}
+		else return true;
+	}
+	
 	public void clearCourses(){
 		courses.clear();
 	}
