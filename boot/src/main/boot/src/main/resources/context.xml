@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+http://www.springframework.org/schema/integration 
+http://www.springframework.org/schema/integration/spring-integration-4.3.xsd">
+
+	<bean id="courseManager" class="elosztott.me.iit.CourseManager" />
+
+
+	<int:gateway service-interface="elosztott.me.iit.SendCourses"
+		id="gateway" default-request-channel="courseChannel"
+		default-reply-channel="reportChannel" default-reply-timeout="3000" />
+
+
+	<int:channel id="courseChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+
+	<int:channel id="reportChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+	<int:channel id="sendCourseChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+		<int:channel id="sendDatedCourseChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+
+	<int:channel id="sendMessageChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+	<int:channel id="filteredCourseChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+
+	<int:channel id="filteredStarterCourseChannel">
+		<int:queue capacity="10" />
+	</int:channel>
+
+	<int:poller default="true" fixed-delay="50" />
+
+	<int:filter id="CourseFilter" ref="CourseFilterImpl"
+		input-channel="sendDatedCourseChannel" output-channel="filteredStarterCourseChannel"
+		discard-channel="filteredCourseChannel" />
+	<bean id="CourseFilterImpl" class="elosztott.me.iit.CourseFilter" />
+
+	<bean id="courseRouter" class="elosztott.me.iit.CourseRouter" />
+	<int:router id="messageRouter" input-channel="courseChannel"
+		ref="courseRouter" />
+
+	<bean id="MessageActivator" class="elosztott.me.iit.MessageActivator" />
+	<int:service-activator id="handleMessageServiceActivator"
+		input-channel="sendMessageChannel" output-channel="reportChannel" ref="MessageActivator" />
+
+	<bean id="courseActivator" class="elosztott.me.iit.NotStarterCourseFileActivator" />
+	<int:service-activator id="handleNotStarterCourseActivator"
+		requires-reply="false" input-channel="filteredCourseChannel"
+		output-channel="reportChannel" ref="courseActivator" />
+
+	<bean id="starterCourseActivator" class="elosztott.me.iit.StarterCourseFileActivator" />
+	<int:service-activator id="handleStarterCourseActivator"
+		requires-reply="false" input-channel="filteredStarterCourseChannel"
+		output-channel="reportChannel" ref="starterCourseActivator" />
+		
+	<int:header-enricher input-channel="sendCourseChannel" output-channel="sendDatedCourseChannel">
+	<int:header name="additionDate" expression="new java.util.Date()" />
+	</int:header-enricher>
+</beans>
