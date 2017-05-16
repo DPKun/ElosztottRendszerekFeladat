@@ -57,5 +57,12 @@ public class CourseController {
 		}
 		}
 	
+	
+	@RequestMapping(value="/rest")
+	public ModelAndView rest(){
+	        ModelAndView model = new ModelAndView("rest");
+	        return model;
+     
+	        }
 
 }
