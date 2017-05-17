@@ -13,7 +13,7 @@ public class CourseController {
 	CourseManager courseManager;
 	
 
-	@RequestMapping(value="/")
+	@RequestMapping(value={"/","/rest"})
 	public ModelAndView rest(){
 	        ModelAndView model = new ModelAndView("static/html/rest.html");
 	        return model;

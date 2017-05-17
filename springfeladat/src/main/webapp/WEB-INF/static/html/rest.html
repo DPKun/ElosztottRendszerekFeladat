@@ -1,20 +1,33 @@
 <!DOCTYPE html>
  <html lang="en-US">
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
  <body>
  
- <div ng-app="myApp" ng-controller="myCtrl"> 
- <header>
+ <div ng-app="myApp" ng-controller="myCtrl"  layout-padding  layout-margin> 
+ <md-toolbar class="md-primary">
+         <div class="md-toolbar-tools">
+            <h2 class="md-flex">Courses</h2>
+            <md-tab ></md-tab>
+             <md-button href="#/">
+       Home
+      </md-button>
+      <md-button href="#listCourses">
+     List Courses
+      </md-button>
+         <md-button href="#addCourse">
+      Add Course
+         </div>
 
-                <ul >
-                    <li><a href="#/"> Home</a></li>
-                    <li><a href="#listCourses">List Courses</a></li>
-                    <li><a href="#addCourse"></i> Add Course</a></li>
-                </ul>
-        </header>
+      </md-toolbar>
+
+
  
- <hr>
 <div id="main">
 <div class="ng-view">
 		
@@ -24,7 +37,7 @@
  
  
  <script>
- var app = angular.module('myApp', ['ngRoute']);
+ var app = angular.module('myApp', ['ngRoute','ngMaterial','ngMessages']);
  
  app.config(function($routeProvider) {
      $routeProvider
@@ -48,35 +61,55 @@
          });
  });
 
+ 
+ app.factory("coursesfac", function($http){
+	var factory = {};
+	
+	factory.list = function(callback){
+				 $http.get("angular/getCourses").success(callback);
+	}
+			
+		return factory;
+		
+	
+	});
+ 
+ app.service("courseSercive", function($http){
+	this.send =  function(param) {
+        $http.post("angular/addCourse",param).then(function(response){
+        	console.log("Lefutott")
+        	window.location.reload(); 
+  });}
+	 
+ });
  app.controller('myCtrl', function($scope, $http) {
 	   $scope.message = "Welcome";
     
     
 });
- app.controller('listController', function($scope,$http) {
+ app.controller('listController', function($scope,$http, coursesfac) {
      // create a message to display in our view
-		$http.get("angular/getCourses")
-	     .then(function(response) {
-	     	console.log(response);
-	         $scope.data = response.data;
-	         console.log()
-	         console.log(response.data);
-	     });
+	 coursesfac.list(function(courses){
+			$scope.data=courses;
+	    });
  });
  
- app.controller('addController', function($scope,$http) {
+ app.controller('addController', function($scope,$http,courseSercive) {
      // create a message to display in our view
-      
+      		
 	    	$scope.message="If done, list Courses";
-	 $scope.send = function() {
-	    	 $scope.course = angular.copy($scope.master);
-	        $http.post("angular/addCourse", {'courseName': $scope.courseName, 'courseCredit' : $scope.courseCredit,'preferedSemester':$scope.preferedSemester }).then(function(response){
-	        	console.log("Lefutott")
-	        	window.location.reload(); 
-	        });
+	    	$scope.send = function() {
+	    		 var data = 
+	        	 {'courseName':  $scope.courseName, 
+	        			 'courseCredit' :$scope.courseCredit,
+	        			 'preferedSemester':$scope.preferedSemester };
+	        		courseSercive.send(data);
+	        		window.location.reload();
+		    
+		        
+		    };
+     
 	    
-	        
-	    };
  });
  
 

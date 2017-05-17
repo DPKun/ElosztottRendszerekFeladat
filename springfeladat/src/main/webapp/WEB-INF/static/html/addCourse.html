@@ -1,20 +1,41 @@
  <div>
- <p>{{message}}</p>
+<p class="md-display-1" >
+{{message}}
+</p>
  <form name="myForm"  >
-                <p>Course Name:</p>
-                <input type="text" name="courseName"  ng-model="courseName" required />
-                <span ng-show ="myForm.courseName.$invalid"> It is required</span>
+               
+                  <md-input-container class="md-block" flex-gt-sm>
+            <label>Course Name</label>
+            <input name="courseName" ng-model="courseName" required>
+      <div ng-messages="myForm.courseName.$error">
+      <ng-message when="required" translate>Course Name is required.</ng-message>
+    </div> 
+          </md-input-container>
+                
           
+<md-input-container class = "md-block" flex-gt-sm>
+<label>Course Credit</label>
+<input type="number" name="courseCredit" ng-model="courseCredit" min="0" max="30" required>
+<div ng-messages="myForm.courseCredit.$error">
+      <ng-message when="required" translate>Course Credit is required.</ng-message>
+        <ng-message when="min" translate>Course Credit is a positive number.</ng-message>
+         <ng-message when="max" translate>Course Credit is loweer than 30.</ng-message>
+    </div> 
 
- <p>Course Credit:</p>
-   <input type="text" name="courseCredit" ng-model="courseCredit" ng-pattern="/^[1-9][0-9]{0,1}|[0]$/" ng-init="courseCredit = '0'" required>
- 	<span ng-show="myForm.courseCredit.$invalid">Please, write a valid number.</span>
- 	
- 	<p>Semester:</p>
-   <input type="text" name="preferedSemester" ng-model="preferedSemester" ng-pattern="/^[1-9][0-9]{0,1}$/" ng-init="preferedSemester = '0'" required>
- 	<span ng-show="myForm.preferedSemester.$invalid">Please, write a valid number.</span>
- 	<p>
-    <button type="submit" ng-disabled="myForm.courseName.$pristine || (myForm.courseCredit.$dirty && myForm.courseCredit.$invalid ) || (myForm.preferedSemester.$dirty && myForm.preferedSemester.$invalid )  || (myForm.preferedSemester.$pristine && myForm.preferedSemester.$invalid )  || (myForm.courseName.$dirty && myForm.courseName.$invalid)" ng-click="send()">Send</button>
+</md-input-container>
+
+            
+<md-input-container class = "md-block" flex-gt-sm>
+<label>Course Semester</label>
+ <input type="number" name="preferedSemester" ng-model="preferedSemester" min="1" max="11" required>
+<div ng-messages="myForm.preferedSemester.$error">
+      	<ng-message when="required" translate>Course Semester is required.</ng-message>
+        <ng-message when="min" translate>Course Semester is higher than 0.</ng-message>
+        <ng-message when="max" translate>Course Semester is lower than 11.</ng-message>
+    </div> 
+
+</md-input-container>
+    <md-button class ="md-raised md-primary" type="submit" ng-disabled="myForm.courseName.$pristine || (myForm.courseCredit.$dirty && myForm.courseCredit.$invalid ) || (myForm.preferedSemester.$dirty && myForm.preferedSemester.$invalid )  || (myForm.preferedSemester.$pristine && myForm.preferedSemester.$invalid )  || (myForm.courseName.$dirty && myForm.courseName.$invalid)" ng-click="send()">Send</md-button>
 </p>
 </form><br>
  </div>
