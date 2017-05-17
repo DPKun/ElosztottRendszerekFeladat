@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+ <html lang="en-US">
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+ <body>
+ 
+ <div ng-app="myApp" ng-controller="myCtrl"> 
+ <header>
+
+                <ul >
+                    <li><a href="#/"> Home</a></li>
+                    <li><a href="#listCourses">List Courses</a></li>
+                    <li><a href="#addCourse"></i> Add Course</a></li>
+                </ul>
+        </header>
+ 
+ <hr>
+<div id="main">
+<div class="ng-view">
+		
+		</div>
+</div>
+
+ 
+ 
+ <script>
+ var app = angular.module('myApp', ['ngRoute']);
+ 
+ app.config(function($routeProvider) {
+     $routeProvider
+
+         // route for the home page
+         
+         .when('/', {
+             templateUrl : 'static/html/home.html',
+             controller  : 'myCtrl'
+         })
+         
+         .when('/listCourses', {
+             templateUrl : 'static/html/listCourses.html',
+             controller  : 'listController'
+         })
+
+         // route for the about page
+         .when('/addCourse', {
+             templateUrl : "static/html/addCourse.html",
+             controller  : 'addController'
+         });
+ });
+
+ app.controller('myCtrl', function($scope, $http) {
+	   $scope.message = "Welcome";
+    
+    
+});
+ app.controller('listController', function($scope,$http) {
+     // create a message to display in our view
+		$http.get("angular/getCourses")
+	     .then(function(response) {
+	     	console.log(response);
+	         $scope.data = response.data;
+	         console.log()
+	         console.log(response.data);
+	     });
+ });
+ 
+ app.controller('addController', function($scope,$http) {
+     // create a message to display in our view
+      
+	    	$scope.message="If done, list Courses";
+	 $scope.send = function() {
+	    	 $scope.course = angular.copy($scope.master);
+	        $http.post("angular/addCourse", {'courseName': $scope.courseName, 'courseCredit' : $scope.courseCredit,'preferedSemester':$scope.preferedSemester }).then(function(response){
+	        	console.log("Lefutott")
+	        	window.location.reload(); 
+	        });
+	    
+	        
+	    };
+ });
+ 
+
+ </script>
+ 
+ </body>
+ </html> 
