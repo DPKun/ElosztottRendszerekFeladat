@@ -12,7 +12,7 @@
 <%@include file="menu.jsp" %>
 <p></p>
 <h3><spring:message code="label.permissionDenied"/></h3>
-<a href="/springfeladat/welcome">  <button type="submit"><spring:message code="label.back"/></button></a>
+<a href="/welcome">  <button type="submit"><spring:message code="label.back"/></button></a>
   
 </body>
 </html>

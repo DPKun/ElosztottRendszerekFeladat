@@ -15,10 +15,10 @@
 </span>
 <span>
 <sec:authorize access="isAuthenticated()">
-<a href="/springfeladat/logout"><spring:message code="label.logout"/></a>
+<a href="/logout"><spring:message code="label.logout"/></a>
 </sec:authorize>
 <sec:authorize access="!isAuthenticated()">
-<a href="/springfeladat/login"><spring:message code="label.signInButton"/></a>
+<a href="/login"><spring:message code="label.signInButton"/></a>
 </sec:authorize>
 </span>
 </div>

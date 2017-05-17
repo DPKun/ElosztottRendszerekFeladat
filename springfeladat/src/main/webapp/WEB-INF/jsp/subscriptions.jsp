@@ -28,6 +28,6 @@
 </c:forEach>
 </table>
 </c:if>
-<a href="/springfeladat/welcome">  <button type="submit"><spring:message code="label.back"/></button></a>
+<a href="/welcome">  <button type="submit"><spring:message code="label.back"/></button></a>
 </body>
 </html>

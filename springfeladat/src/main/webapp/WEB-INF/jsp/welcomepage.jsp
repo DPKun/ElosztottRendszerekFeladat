@@ -13,7 +13,7 @@
 
 </c:if>
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-<form method="get" action="/springfeladat/admin/addCourse">
+<form method="get" action="/admin/addCourse">
     <button type="submit"><spring:message code="label.newCourse"/></button>
 </form>
 </sec:authorize>
@@ -51,6 +51,6 @@
 </c:forEach>
 </table>
 </c:if>
-<a href="/springfeladat/display">  <button type="submit"><spring:message code="label.subs"/></button></a>
+<a href="/display">  <button type="submit"><spring:message code="label.subs"/></button></a>
 </body>
 </html>
